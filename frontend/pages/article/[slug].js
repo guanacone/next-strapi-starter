@@ -1,10 +1,10 @@
-import ReactMarkdown from "react-markdown"
-import Moment from "react-moment"
-import { fetchAPI } from "../../lib/api"
-import Layout from "../../components/layout"
-import NextImage from "../../components/image"
-import Seo from "../../components/seo"
-import { getStrapiMedia } from "../../lib/media"
+import ReactMarkdown from 'react-markdown'
+import Moment from 'react-moment'
+import { fetchAPI } from '../../lib/api'
+import Layout from '../../components/layout'
+import NextImage from '../../components/image'
+import Seo from '../../components/seo'
+import { getStrapiMedia } from '../../lib/media'
 
 const Article = ({ article, categories }) => {
   const imageUrl = getStrapiMedia(article.attributes.image)
@@ -59,7 +59,7 @@ const Article = ({ article, categories }) => {
 }
 
 export async function getStaticPaths() {
-  const articlesRes = await fetchAPI("/articles", { fields: ["slug"] })
+  const articlesRes = await fetchAPI('/articles', { fields: ['slug'] })
 
   return {
     paths: articlesRes.data.map((article) => ({
@@ -72,13 +72,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const articlesRes = await fetchAPI("/articles", {
+  const articlesRes = await fetchAPI('/articles', {
     filters: {
       slug: params.slug,
     },
-    populate: "*",
+    populate: '*',
   })
-  const categoriesRes = await fetchAPI("/categories")
+  const categoriesRes = await fetchAPI('/categories')
 
   return {
     props: { article: articlesRes.data[0], categories: categoriesRes },
